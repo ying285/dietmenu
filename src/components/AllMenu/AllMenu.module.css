@@ -1,0 +1,8 @@
+.allmenu {
+  padding: 10rem 3rem;
+}
+
+.allmenu ul {
+  display: flex;
+  flex-wrap: wrap;
+}

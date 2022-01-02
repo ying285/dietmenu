@@ -1,0 +1,63 @@
+.image {
+  background-image: linear-gradient(to right, #7ed56f71, #28b48575),
+    url(../../images/headerImage.jpg);
+  background-size: contain;
+  background-position: center;
+  position: relative;
+}
+
+.searchForm {
+  position: absolute;
+  top: 0.5%;
+  right: 35%;
+}
+
+.searchForm input {
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: 1px solid rgb(93, 97, 94);
+  padding: 0.5rem 2rem;
+  width: 100%;
+  background-color: rgb(241, 240, 240);
+}
+
+.searchForm button {
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: rgb(6, 83, 6);
+  color: white;
+  padding: 0.5rem 3rem;
+  border: 1px solid #032b02;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.searchForm button:hover {
+  background-color: rgb(16, 190, 16);
+  color: rgb(58, 57, 57);
+}
+
+.form {
+  display: flex;
+}
+
+.searchButton {
+  margin-left: 0.3rem;
+}
+
+.moreBtn {
+  text-align: end;
+  margin-right: 10rem;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+button:hover {
+  color: rgb(138, 136, 136);
+}

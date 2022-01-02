@@ -1,0 +1,70 @@
+.formLayout {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.loginForm {
+  padding: 3rem;
+  border: 3px solid #1c5a24;
+  border-radius: 5px;
+  background-color: #068f0d;
+  color: #fff;
+}
+
+.loginForm h3 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.controlForm {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.controlForm input {
+  display: block;
+  font: inherit;
+  border-radius: 4px;
+  border: 1px solid rgb(93, 97, 94);
+  padding: 0.5rem;
+  width: 100%;
+  background-color: rgb(241, 240, 240);
+  margin-top: 0.5rem;
+}
+
+.controlForm label {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.actions {
+  text-align: center;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: rgb(6, 83, 6);
+  color: white;
+  padding: 0.8rem 3rem;
+  border: 1px solid #032b02;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: rgb(12, 153, 12);
+  border-color: rgb(12, 153, 12);
+}
+
+.loginText {
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+}
+.loginText:hover {
+  color: rgb(82, 79, 79);
+}
