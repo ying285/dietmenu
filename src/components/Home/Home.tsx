@@ -44,31 +44,32 @@ const Home: React.FC = () => {
     if (enteredSearchInput.trim() !== "") {
       dispatch(searchActions.searchMenuItems(enteredSearchInput));
     }
-
-    return (
-      <div className={classes.image}>
-        <div className={classes.searchForm}>
-          <form className={classes.form} onSubmit={submitHandler}>
-            <div>
-              <input
-                type="text"
-                placeholder="Search your food here"
-                ref={searchInputRef}
-              />
-            </div>
-            <div className={classes.searchButton}>
-              <button>Search</button>
-            </div>
-          </form>
-        </div>
-        <div>
-          <AllMenu newData={menuItem} />{" "}
-        </div>
-        <div className={classes.moreBtn}>
-          <button onClick={getFetchHandler}>More...</button>
-        </div>
-      </div>
-    );
   };
+
+  return (
+    <div className={classes.image}>
+      <div className={classes.searchForm}>
+        <form className={classes.form} onSubmit={submitHandler}>
+          <div>
+            <input
+              type="text"
+              placeholder="Search your food here"
+              ref={searchInputRef}
+            />
+          </div>
+          <div className={classes.searchButton}>
+            <button>Search</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <AllMenu newData={menuItem} />{" "}
+      </div>
+      <div className={classes.moreBtn}>
+        <button onClick={getFetchHandler}>More...</button>
+      </div>
+    </div>
+  );
 };
+
 export default Home;
