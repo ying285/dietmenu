@@ -21,9 +21,7 @@ const WeekMenu = () => {
   console.log(mainMenuItem);
   console.log(extraMenuItem);
 
-  // choosedlabel.map((el: any) => console.log(el));
-
-  let itemArray = [];
+  let itemArray: any = [];
 
   const mainData = mainMenuItem.hits?.map((item: any) => item.recipe);
   const extraData = extraMenuItem.hits?.map((item: any) => item.recipe);
@@ -34,9 +32,12 @@ const WeekMenu = () => {
   dispatch(searchActions.searchMenuItems(totalData));
 
   for (let i = 0; i < totalData?.length; i++) {
+    console.log(choosedlabel[i]?.label);
+    //console.log(totalData[i]?.label);
+
     if (choosedlabel[i]?.label === totalData[i]?.label) {
-      console.log(totalData[i]);
-      itemArray.push({ data: totalData[i], id: choosedlabel[i]?.id });
+      totalData[i] &&
+        itemArray.push({ data: totalData[i], id: choosedlabel[i]?.id });
     }
   }
 

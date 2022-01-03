@@ -45,6 +45,16 @@ const NavBar: React.FC = () => {
                 </NavLink>
               </li>
             )}
+            {/* <li>
+              <NavLink
+                className={(navData: any) =>
+                  navData.isActive ? classes.active : ""
+                }
+                to="/home/search"
+              >
+                search
+              </NavLink>
+            </li> */}
 
             <li>
               <NavLink

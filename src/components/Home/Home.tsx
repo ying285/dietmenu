@@ -5,8 +5,11 @@ import { menuActions } from "../store/menuSlice";
 import { RootState } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { searchActions } from "../store/searchSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
@@ -42,8 +45,10 @@ const Home: React.FC = () => {
     event.preventDefault();
     const enteredSearchInput = searchInputRef.current!.value;
     if (enteredSearchInput.trim() !== "") {
-      dispatch(searchActions.searchMenuItems(enteredSearchInput));
+      dispatch(searchActions.getSearchOrd(enteredSearchInput));
     }
+
+    navigate("/search");
   };
 
   return (
@@ -57,6 +62,7 @@ const Home: React.FC = () => {
               ref={searchInputRef}
             />
           </div>
+
           <div className={classes.searchButton}>
             <button>Search</button>
           </div>
@@ -65,6 +71,7 @@ const Home: React.FC = () => {
       <div>
         <AllMenu newData={menuItem} />{" "}
       </div>
+
       <div className={classes.moreBtn}>
         <button onClick={getFetchHandler}>More...</button>
       </div>

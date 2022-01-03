@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface loginState {
   loggedIn: boolean;
   isLogin: boolean;
-  getToken: any;
+  getToken: string | any;
 }
 
 const initialState: loginState = {
@@ -19,16 +19,19 @@ const loginSlice = createSlice({
       if (action.payload) {
         localStorage.setItem("token", action.payload);
         state.getToken = localStorage.getItem("token");
+
         state.loggedIn = !!state.getToken;
       }
     },
+
+    toggleLogin(state) {
+      state.isLogin = !state.isLogin;
+    },
+
     logout(state) {
       state.loggedIn = false;
 
       localStorage.removeItem("token");
-    },
-    toggleLogin(state) {
-      state.isLogin = !state.isLogin;
     },
   },
 });
