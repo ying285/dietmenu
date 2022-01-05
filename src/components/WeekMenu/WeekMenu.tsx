@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import WeekMenuDetail from "../WeekMenuDetail/WeekMenuDetail";
 import classes from "./WeekMenu.module.css";
 import { searchActions } from "../store/searchSlice";
+import { forEachTrailingCommentRange } from "typescript";
 
 const WeekMenu = () => {
   const dispatch = useDispatch();
@@ -31,17 +32,20 @@ const WeekMenu = () => {
 
   dispatch(searchActions.searchMenuItems(totalData));
 
-  for (let i = 0; i < totalData?.length; i++) {
-    console.log(choosedlabel[i]?.label);
-    //console.log(totalData[i]?.label);
+  // for (let i = 0; i < totalData?.length; i++) {
+  //   if (choosedlabel[i]?.label === totalData[i]?.label) {
+  //     totalData[i] &&
+  //       itemArray.push({ data: totalData[i], id: choosedlabel[i]?.id });
+  //   }
+  // }
 
-    if (choosedlabel[i]?.label === totalData[i]?.label) {
-      totalData[i] &&
-        itemArray.push({ data: totalData[i], id: choosedlabel[i]?.id });
-    }
-  }
-
-  console.log(itemArray);
+  choosedlabel?.forEach((menuItem: any): void => {
+    totalData?.forEach((item: any): void => {
+      if (menuItem?.label === item?.label) {
+        itemArray.push({ data: item, id: menuItem?.id });
+      }
+    });
+  });
 
   return (
     <div className={classes.weekmenu}>

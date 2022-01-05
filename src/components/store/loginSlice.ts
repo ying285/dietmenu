@@ -15,12 +15,10 @@ const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    login(state, action: PayloadAction<string>) {
-      if (action.payload) {
-        localStorage.setItem("token", action.payload);
-        state.getToken = localStorage.getItem("token");
-
-        state.loggedIn = !!state.getToken;
+    login(state) {
+      state.getToken = localStorage.getItem("token");
+      if (state.getToken) {
+        state.loggedIn = true;
       }
     },
 

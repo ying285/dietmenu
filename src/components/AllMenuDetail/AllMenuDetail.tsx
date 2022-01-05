@@ -71,16 +71,19 @@ const AllMenuDetail: React.FC<{
 
   return (
     <Fragment>
-      <div className={classes.card}>
-        <div className={classes.cardImage}>
-          <img src={props.image} alt="" />
+      <div className={classes.wholeCard}>
+        <div className={classes.card}>
+          <div className={classes.cardImage}>
+            <img src={props.image} alt="" />
+          </div>
+          <div className={classes.cardText}>
+            <p>{`Label: ${props.label}`}</p>
+            <p>{`Cuisine type: ${props.cuisineType}`}</p>
+            <p>{`Diet label: ${props.dietLabels}`}</p>
+            <p>{`Meal Type: ${props.mealType}`}</p>
+          </div>
         </div>
-        <div className={classes.cardText}>
-          <p>{`Label: ${props.label}`}</p>
-          <p>{`Cuisine type: ${props.cuisineType}`}</p>
-          <p>{`Diet label: ${props.dietLabels}`}</p>
-          <p>{`Meal Type: ${props.mealType}`}</p>
-        </div>
+
         <div className={classes.diatDate}>
           <div
             className={`${classes.item}  ${
@@ -91,7 +94,7 @@ const AllMenuDetail: React.FC<{
               type="checkbox"
               name="mon"
               onChange={monHandler}
-              disabled={changeColorMon}
+              checked={changeColorMon}
             />
             <label htmlFor="mon">Mon</label>
           </div>
@@ -104,7 +107,7 @@ const AllMenuDetail: React.FC<{
               type="checkbox"
               name="tue"
               onChange={tueHandler}
-              //disabled={changeColorTue}
+              checked={changeColorTue}
             />
             <label htmlFor="tue">Tue</label>
           </div>
@@ -117,7 +120,7 @@ const AllMenuDetail: React.FC<{
               type="checkbox"
               name="wed"
               onChange={wedHandler}
-              //disabled={changeColorWed}
+              checked={changeColorWed ? true : false}
             />
             <label htmlFor="wed">Wed</label>
           </div>
@@ -126,7 +129,12 @@ const AllMenuDetail: React.FC<{
               changeColorThu ? classes.itemColor : ""
             }`}
           >
-            <input type="checkbox" name="thu" onChange={thuHandler} />
+            <input
+              type="checkbox"
+              name="thu"
+              onChange={thuHandler}
+              checked={changeColorThu}
+            />
             <label htmlFor="thu">Thu</label>
           </div>
           <div
@@ -134,7 +142,12 @@ const AllMenuDetail: React.FC<{
               changeColorFri ? classes.itemColor : ""
             }`}
           >
-            <input type="checkbox" name="fri" onChange={friHandler} />
+            <input
+              type="checkbox"
+              name="fri"
+              onChange={friHandler}
+              checked={changeColorFri}
+            />
             <label htmlFor="fri">Fri</label>
           </div>
           <div
@@ -142,7 +155,12 @@ const AllMenuDetail: React.FC<{
               changeColorSat ? classes.itemColor : ""
             }`}
           >
-            <input type="checkbox" name="sat" onChange={satHandler} />
+            <input
+              type="checkbox"
+              name="sat"
+              onChange={satHandler}
+              checked={changeColorSat}
+            />
             <label htmlFor="sat">Sat</label>
           </div>
 
@@ -151,7 +169,12 @@ const AllMenuDetail: React.FC<{
               changeColorSun ? classes.itemColor : ""
             }`}
           >
-            <input type="checkbox" name="sun" onChange={sunHandler} />
+            <input
+              type="checkbox"
+              name="sun"
+              onChange={sunHandler}
+              checked={changeColorSun}
+            />
             <label htmlFor="sun">Sun</label>
           </div>
         </div>

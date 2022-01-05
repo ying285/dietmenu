@@ -41,7 +41,8 @@ const Login = () => {
           returnSecureToken: false,
         })
         .then((res) => {
-          dispatch(loginActions.login(res.data.idToken));
+          localStorage.setItem("token", res.data.idToken);
+          dispatch(loginActions.login());
           navigate("/home");
         })
         .catch((err) => alert(err.message));

@@ -7,15 +7,16 @@ import useDataFetch from "../hooks/useDataFetch";
 const SearchMenuDetail: React.FC = () => {
   const mySearchOrd = useSelector((state: RootState) => state.search.searchOrd);
 
-  const { totalData } = useDataFetch();
+  //const { totalData } = useDataFetch();
 
   let result: any;
 
-  result = totalData?.find((el: any) => el?.label === mySearchOrd);
+  // result = totalData?.find((el: any) => el?.label === mySearchOrd);
 
   let elements;
 
   if (result) {
+    console.log("result running");
     elements = (
       <div className={classes.card}>
         <div className={classes.cardImage}>
@@ -30,6 +31,7 @@ const SearchMenuDetail: React.FC = () => {
       </div>
     );
   } else {
+    console.log("alert running");
     alert("Please enter a correct search ord!");
   }
 

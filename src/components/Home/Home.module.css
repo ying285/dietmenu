@@ -8,7 +8,7 @@
 
 .searchForm {
   position: absolute;
-  top: 0.5%;
+  top: 1.5%;
   right: 35%;
 }
 
@@ -48,6 +48,8 @@
 .moreBtn {
   text-align: end;
   margin-right: 10rem;
+
+  padding-bottom: 10rem;
 }
 
 button {
@@ -60,4 +62,8 @@ button {
 
 button:hover {
   color: rgb(138, 136, 136);
+}
+
+.allMenuSection {
+  margin-bottom: -4rem;
 }

@@ -4,12 +4,17 @@ import AllMenuDetail from "../AllMenuDetail/AllMenuDetail";
 import { mainMenuActions } from "../store/mainMenuSlice";
 import { RootState } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
+import useDataFetch from "../hooks/useDataFetch";
 
-const AllMenu = (props: { newData: any }) => {
+const AllMenu: React.FC<{ newData: any }> = (props) => {
+  const { totalData } = useDataFetch();
+
   const dispatch = useDispatch();
   const mainMenuItem = useSelector(
     (state: RootState) => state.mainMenu.mainMenuItem
   );
+
+  const showItems = useSelector((state: RootState) => state.search.isShowItems);
 
   const newMenuItems = props.newData.hits?.map((item: any) => item.recipe);
 
@@ -19,6 +24,7 @@ const AllMenu = (props: { newData: any }) => {
         "https://api.edamam.com/api/recipes/v2?type=public&app_key=9aab7352a044f2870a286522b945386f&app_id=2200d214&q=lasagne"
       );
       const data = await response.json();
+
       dispatch(mainMenuActions.getMainMenuItems(data));
     } catch (err: any) {
       alert(err.message);
@@ -29,13 +35,16 @@ const AllMenu = (props: { newData: any }) => {
     fetchData();
   }, []);
 
-  const mainData = mainMenuItem.hits?.map((item: any) => item.recipe);
+  const mainData = mainMenuItem?.hits?.map((item: any) => item.recipe);
+
+  console.log(totalData);
+  console.log(mainData);
 
   return (
     <div className={classes.allmenu}>
       <ul>
-        {mainData &&
-          mainData.map((el: any) => (
+        {!showItems &&
+          mainData?.map((el: any) => (
             <AllMenuDetail
               key={el.image}
               image={el.image}
@@ -45,8 +54,21 @@ const AllMenu = (props: { newData: any }) => {
               mealType={el.mealType}
             />
           ))}
-        {newMenuItems &&
-          newMenuItems.map((el: any) => (
+
+        {!showItems &&
+          newMenuItems?.map((el: any) => (
+            <AllMenuDetail
+              key={el.image}
+              image={el.image}
+              dietLabels={el.dietLabels}
+              label={el.label}
+              cuisineType={el.cuisineType}
+              mealType={el.mealType}
+            />
+          ))}
+
+        {showItems &&
+          totalData?.map((el: any) => (
             <AllMenuDetail
               key={el.image}
               image={el.image}

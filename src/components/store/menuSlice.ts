@@ -17,7 +17,6 @@ const menuSlice = createSlice({
     },
     isFetchHandler(state) {
       state.isFetch = !state.isFetch;
-      console.log(state.isFetch);
     },
   },
 });

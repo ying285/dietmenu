@@ -30,7 +30,7 @@ const weekMenuSlice = createSlice({
       switch (action.payload) {
         case "mon":
           state.isColorMon = !state.isColorTue;
-          console.log(state.isColorMon);
+
           break;
         case "tue":
           state.isColorTue = !state.isColorTue;
@@ -53,11 +53,20 @@ const weekMenuSlice = createSlice({
       }
     },
     labelMatch(state, action: PayloadAction<any>) {
-      state.choosedItem = state.choosedItem.concat({
-        label: action.payload.label,
-        id: action.payload.id,
-      });
-      console.log(state.choosedItem);
+      const newItem = action.payload;
+      const existingItem = state.choosedItem?.find(
+        (el: any) => el.label === newItem.label
+      );
+      if (!existingItem) {
+        state.choosedItem = state.choosedItem.concat({
+          label: action.payload.label,
+          id: action.payload.id,
+        });
+      } else {
+        state.choosedItem = state.choosedItem.filter(
+          (el: any) => el.label !== action.payload.label
+        );
+      }
     },
   },
 });

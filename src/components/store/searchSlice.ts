@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface searchState {
   totalItems: string[];
   searchOrd: string;
-  showOrd: string;
+  isShowItems: boolean;
 }
 
 const initialState: searchState = {
   totalItems: [],
   searchOrd: "",
-  showOrd: "",
+  isShowItems: false,
 };
 
 const searchSlice = createSlice({
@@ -22,14 +22,9 @@ const searchSlice = createSlice({
     },
     getSearchOrd(state, action: PayloadAction<string>) {
       state.searchOrd = action.payload;
-      // console.log(state.searchOrd);
-
-      //let selectedItem;
-      // selectedItem
-      //   ? state.totalItems.find((el: any) => el.label === state.searchOrd)
-      //   : alert("please enter a correct ord");
-      // state.showOrd = selectedItem;
-      // console.log(state.showOrd);
+    },
+    isShowSearchItems(state) {
+      state.isShowItems = !state.isShowItems;
     },
   },
 });
