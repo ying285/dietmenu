@@ -1,49 +1,65 @@
-import classes from "./AllMenu.module.css";
-import { useEffect } from "react";
-import AllMenuDetail from "../AllMenuDetail/AllMenuDetail";
-import { mainMenuActions } from "../store/mainMenuSlice";
-import { RootState } from "../store/index";
-import { useSelector, useDispatch } from "react-redux";
-import useDataFetch from "../hooks/useDataFetch";
+import classes from './AllMenu.module.css';
+import { useEffect } from 'react';
+import AllMenuDetail from '../AllMenuDetail/AllMenuDetail';
+import { mainMenuActions } from '../store/mainMenuSlice';
+import { RootState } from '../store/index';
+import { useSelector, useDispatch } from 'react-redux';
+import useDataFetch from '../hooks/useDataFetch';
 
 const AllMenu: React.FC<{ newData: any }> = (props) => {
-  const { totalData } = useDataFetch();
-
-  const dispatch = useDispatch();
-  const mainMenuItem = useSelector(
-    (state: RootState) => state.mainMenu.mainMenuItem
+  useSelector((state: RootState) => state.search.isShowItems);
+  const recipes: any = useSelector(
+    (state: RootState) => state.recipesReducer.recipes
   );
+  // const { totalData } = useDataFetch();
 
-  const showItems = useSelector((state: RootState) => state.search.isShowItems);
+  // const dispatch = useDispatch();
+  // const mainMenuItem = useSelector(
+  //   (state: RootState) => state.mainMenu.mainMenuItem
+  // );
 
-  const newMenuItems = props.newData.hits?.map((item: any) => item.recipe);
+  // const showItems = useSelector((state: RootState) => state.search.isShowItems);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://api.edamam.com/api/recipes/v2?type=public&app_key=9aab7352a044f2870a286522b945386f&app_id=2200d214&q=lasagne"
-      );
-      const data = await response.json();
+  // const newMenuItems = props.newData.hits?.map((item: any) => item.recipe);
 
-      dispatch(mainMenuActions.getMainMenuItems(data));
-    } catch (err: any) {
-      alert(err.message);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://api.edamam.com/api/recipes/v2?type=public&app_key=9aab7352a044f2870a286522b945386f&app_id=2200d214&q=lasagne"
+  //     );
+  //     const data = await response.json();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  //     dispatch(mainMenuActions.getMainMenuItems(data));
+  //   } catch (err: any) {
+  //     alert(err.message);
+  //   }
+  // };
 
-  const mainData = mainMenuItem?.hits?.map((item: any) => item.recipe);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  console.log(totalData);
-  console.log(mainData);
+  // const mainData = mainMenuItem?.hits?.map((item: any) => item.recipe);
+
+  // console.log(totalData);
+  // console.log(mainData);
+
+  if (recipes.length === 0) return <h3>Make a search</h3>;
 
   return (
     <div className={classes.allmenu}>
       <ul>
-        {!showItems &&
+        {recipes.map(({ recipe }: any) => (
+          <AllMenuDetail
+            key={recipe.image}
+            image={recipe.image}
+            dietLabels={recipe.dietLabels}
+            label={recipe.label}
+            cuisineType={recipe.cuisineType}
+            mealType={recipe.mealType}
+          />
+        ))}
+        {/* {!showItems &&
           mainData?.map((el: any) => (
             <AllMenuDetail
               key={el.image}
@@ -77,7 +93,7 @@ const AllMenu: React.FC<{ newData: any }> = (props) => {
               cuisineType={el.cuisineType}
               mealType={el.mealType}
             />
-          ))}
+          ))} */}
       </ul>
     </div>
   );

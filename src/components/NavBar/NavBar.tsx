@@ -1,10 +1,10 @@
-import { Fragment } from "react";
-import classes from "./NavBar.module.css";
-import { NavLink } from "react-router-dom";
-import { loginActions } from "../store/loginSlice";
-import { RootState } from "../store/index";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Fragment } from 'react';
+import classes from './NavBar.module.css';
+import { NavLink } from 'react-router-dom';
+import { loginActions } from '../store/loginSlice';
+import { RootState } from '../store/index';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
 
   const logoutHandler = () => {
     dispatch(loginActions.logout());
-    navigate("/home");
+    navigate('/home');
   };
   return (
     <Fragment>
@@ -26,30 +26,30 @@ const NavBar: React.FC = () => {
             <li>
               <NavLink
                 className={(navData: any) =>
-                  navData.isActive ? classes.active : ""
+                  navData.isActive ? classes.active : ''
                 }
                 to="/home"
               >
                 Home
               </NavLink>
             </li>
-            {loggedIn && (
-              <li>
-                <NavLink
-                  className={(navData: any) =>
-                    navData.isActive ? classes.active : ""
-                  }
-                  to="/weekmenu"
-                >
-                  WeeksMenu
-                </NavLink>
-              </li>
-            )}
+            {/* {loggedIn && ( */}
+            <li>
+              <NavLink
+                className={(navData: any) =>
+                  navData.isActive ? classes.active : ''
+                }
+                to="/weekmenu"
+              >
+                WeeksMenu
+              </NavLink>
+            </li>
+            {/* )} */}
 
             <li>
               <NavLink
                 className={(navData: any) =>
-                  navData.isActive ? classes.active : ""
+                  navData.isActive ? classes.active : ''
                 }
                 to="/login"
               >

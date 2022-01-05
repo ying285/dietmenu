@@ -1,11 +1,13 @@
-import classes from "./Home.module.css";
-import AllMenu from "../AllMenu/AllMenu";
-import React, { useEffect, useCallback, useRef } from "react";
-import { menuActions } from "../store/menuSlice";
-import { RootState } from "../store/index";
-import { useSelector, useDispatch } from "react-redux";
-import { searchActions } from "../store/searchSlice";
-import useDataFetch from "../hooks/useDataFetch";
+import classes from './Home.module.css';
+import AllMenu from '../AllMenu/AllMenu';
+import React, { useEffect, useCallback, useRef } from 'react';
+import { menuActions } from '../store/menuSlice';
+import { RootState } from '../store/index';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchActions } from '../store/searchSlice';
+import useDataFetch from '../hooks/useDataFetch';
+import { recipesActions } from '../store/recipesSlice';
+import useSearch from '../hooks/useSearch';
 
 const Home: React.FC = () => {
   // const queryId = useSelector((state: RootState) => state.search.searchOrd);
@@ -14,39 +16,51 @@ const Home: React.FC = () => {
 
   const dispatch = useDispatch();
   const menuItem = useSelector((state: RootState) => state.extramenu.menuItem);
-  const isFetch: boolean = useSelector(
-    (state: RootState) => state.extramenu.isFetch
+  const nextFetchUrl = useSelector(
+    (state: RootState) => state.recipesReducer.next
   );
+  // const isFetch: boolean = useSelector(
+  //   (state: RootState) => state.extramenu.isFetch
+  // );
 
-  const getFetchHandler = () => {
-    dispatch(menuActions.isFetchHandler());
+  const fetchMoreRecipes = async () => {
+    try {
+      const response = await fetch(nextFetchUrl!);
+      const result = await response.json();
+      dispatch(recipesActions.addMoreRecipes(result));
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
-  let url =
-    "https://api.edamam.com/api/recipes/v2?q=lasagne&app_key=9aab7352a044f2870a286522b945386f&_cont=CHcVQBtNNQphDmgVQntAEX4BYlxtAQUBQWZFA2sRYlNwBAsAUXlSVzMUalQgAVAEQzNJB2AbZ1chBgcPF2cRVzcQNQFyB1YVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=2200d214";
+  useSearch();
 
-  const getMoreItemHandler = useCallback(async () => {
-    if (isFetch) {
-      try {
-        fetch(url)
-          .then((res) => res.json())
-          .then((data) => dispatch(menuActions.openNewMenuItems(data)));
-      } catch (err: any) {
-        alert(err.message);
-      }
-    }
-  }, [dispatch, url, isFetch]);
+  // let url =
+  //   'https://api.edamam.com/api/recipes/v2?q=lasagne&app_key=9aab7352a044f2870a286522b945386f&_cont=CHcVQBtNNQphDmgVQntAEX4BYlxtAQUBQWZFA2sRYlNwBAsAUXlSVzMUalQgAVAEQzNJB2AbZ1chBgcPF2cRVzcQNQFyB1YVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=2200d214';
 
-  useEffect(() => {
-    getMoreItemHandler();
-  }, [getMoreItemHandler]);
+  // const getMoreItemHandler = useCallback(async () => {
+  //   if (isFetch) {
+  //     try {
+  //       fetch(url)
+  //         .then((res) => res.json())
+  //         .then((data) => dispatch(menuActions.openNewMenuItems(data)));
+  //     } catch (err: any) {
+  //       alert(err.message);
+  //     }
+  //   }
+  // }, [dispatch, url, isFetch]);
+
+  // useEffect(() => {
+  //   getMoreItemHandler();
+  // }, [getMoreItemHandler]);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredSearchInput = searchInputRef.current!.value;
-    if (enteredSearchInput.trim() !== "") {
-      dispatch(searchActions.getSearchOrd(enteredSearchInput));
-      dispatch(searchActions.isShowSearchItems());
+    if (enteredSearchInput.trim() !== '') {
+      // dispatch(searchActions.getSearchOrd(enteredSearchInput));
+      // dispatch(searchActions.isShowSearchItems());
+      dispatch(recipesActions.setCurrentQuery(enteredSearchInput));
     }
   };
 
@@ -72,7 +86,7 @@ const Home: React.FC = () => {
       </div>
 
       <div className={classes.moreBtn}>
-        <button onClick={getFetchHandler}>More...</button>
+        <button onClick={fetchMoreRecipes}>More...</button>
       </div>
     </div>
   );
