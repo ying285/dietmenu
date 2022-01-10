@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface mainMenuState {
-  mainMenuItem: any;
+  mainMenuItem: object | any;
 }
 
 const initialState: mainMenuState = { mainMenuItem: {} };

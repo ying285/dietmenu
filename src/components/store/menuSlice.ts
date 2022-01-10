@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface menuState {
-  menuItem: any;
+  menuItem: object;
   isFetch: boolean;
 }
 

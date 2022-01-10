@@ -15,7 +15,6 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
   const menuItem = useSelector((state: RootState) => state.extramenu.menuItem);
   const nextFetchUrl = useSelector((state: RootState) => state.recipes.next);
-  const showItems = useSelector((state: RootState) => state.search.isShowItems);
   let recipes = useSelector((state: RootState) => state.weekMenu.recipes);
   const recipesItems = useSelector(
     (state: RootState) => state.recipes.recipesItems
@@ -64,6 +63,7 @@ const Home: React.FC = () => {
 
       <section className={classes.headerSection}>
         <div>
+          <h4>Choose your week's menu</h4>
           <div className={classes.showItems}>
             <div className={classes.item}></div>
             <div className={classes.item}></div>
@@ -92,7 +92,7 @@ const Home: React.FC = () => {
             <div>
               <input
                 type="text"
-                placeholder="Search your food e.g pizza"
+                placeholder="Search your menu e.g pizza"
                 ref={searchInputRef}
               />
             </div>
@@ -109,7 +109,9 @@ const Home: React.FC = () => {
       </section>
 
       <div className={classes.moreBtn}>
-        {showItems && <button onClick={fetchMoreRecipes}>More...</button>}
+        {!(recipesItems.length === 0) && (
+          <button onClick={fetchMoreRecipes}>More...</button>
+        )}
       </div>
     </main>
   );

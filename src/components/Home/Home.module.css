@@ -8,6 +8,10 @@
 }
 
 .headerSection h4 {
+  position: absolute;
+  top: -8%;
+  left: 38%;
+  font-size: 2rem;
 }
 
 .searchForm {

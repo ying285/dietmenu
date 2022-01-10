@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface recipesState {
-  searchQuery: any;
+  searchQuery: string | any;
   recipesItems: string[];
-  next: any;
+  next: object[] | any;
   totalCount: number;
 }
 

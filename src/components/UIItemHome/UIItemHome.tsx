@@ -28,6 +28,9 @@ const UIItemHome: React.FC<{
       <div>
         <p className={classes.weekday}>{props.weekday}</p>
       </div>
+      <div className={classes.showTitle}>
+        <p>Click to delete</p>
+      </div>
     </div>
   );
 };
