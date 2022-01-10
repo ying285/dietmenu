@@ -1,80 +1,117 @@
 import classes from "./Home.module.css";
 import AllMenu from "../AllMenu/AllMenu";
-import React, { useEffect, useCallback, useRef } from "react";
-import { menuActions } from "../store/menuSlice";
+import React, { useRef } from "react";
 import { RootState } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { searchActions } from "../store/searchSlice";
-import useDataFetch from "../hooks/useDataFetch";
+import { recipesActions } from "../store/recipesSlice";
+import { weekMenuActions } from "../store/weekMenuSlice";
+import useSearch from "../hooks/useSearch";
+import UIItemHome from "../UIItemHome/UIItemHome";
 
 const Home: React.FC = () => {
-  // const queryId = useSelector((state: RootState) => state.search.searchOrd);
-
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
   const menuItem = useSelector((state: RootState) => state.extramenu.menuItem);
-  const isFetch: boolean = useSelector(
-    (state: RootState) => state.extramenu.isFetch
+  const nextFetchUrl = useSelector((state: RootState) => state.recipes.next);
+  const showItems = useSelector((state: RootState) => state.search.isShowItems);
+  let recipes = useSelector((state: RootState) => state.weekMenu.recipes);
+  const recipesItems = useSelector(
+    (state: RootState) => state.recipes.recipesItems
   );
 
-  const getFetchHandler = () => {
-    dispatch(menuActions.isFetchHandler());
+  const sortedRecipes = [...recipes].sort((a: any, b: any) => {
+    return a.weekdayId - b.weekdayId;
+  });
+  //const sortedRecipes = recipes;
+  console.log(sortedRecipes);
+  const fetchMoreRecipes = async () => {
+    try {
+      const response = await fetch(nextFetchUrl!);
+      const result = await response.json();
+      dispatch(recipesActions.addMoreRecipes(result));
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
-  let url =
-    "https://api.edamam.com/api/recipes/v2?q=lasagne&app_key=9aab7352a044f2870a286522b945386f&_cont=CHcVQBtNNQphDmgVQntAEX4BYlxtAQUBQWZFA2sRYlNwBAsAUXlSVzMUalQgAVAEQzNJB2AbZ1chBgcPF2cRVzcQNQFyB1YVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=2200d214";
-
-  const getMoreItemHandler = useCallback(async () => {
-    if (isFetch) {
-      try {
-        fetch(url)
-          .then((res) => res.json())
-          .then((data) => dispatch(menuActions.openNewMenuItems(data)));
-      } catch (err: any) {
-        alert(err.message);
-      }
-    }
-  }, [dispatch, url, isFetch]);
-
-  useEffect(() => {
-    getMoreItemHandler();
-  }, [getMoreItemHandler]);
+  useSearch();
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredSearchInput = searchInputRef.current!.value;
     if (enteredSearchInput.trim() !== "") {
-      dispatch(searchActions.getSearchOrd(enteredSearchInput));
       dispatch(searchActions.isShowSearchItems());
+      dispatch(recipesActions.setCurrentQuery(enteredSearchInput));
+
+      searchInputRef.current!.value = "";
     }
   };
 
-  return (
-    <div className={classes.image}>
-      <div className={classes.searchForm}>
-        <form className={classes.form} onSubmit={submitHandler}>
-          <div>
-            <input
-              type="text"
-              placeholder="Search your food here"
-              ref={searchInputRef}
-            />
-          </div>
+  const goBackHandler = () => {
+    dispatch(weekMenuActions.removeAll());
+    dispatch(recipesActions.toStartSida());
+  };
 
-          <div className={classes.searchButton}>
-            <button>Search</button>
+  return (
+    <main className={classes.image}>
+      {!(recipesItems.length === 0) && (
+        <button className={classes.HomeBtn} onClick={goBackHandler}>
+          To start
+        </button>
+      )}
+
+      <section className={classes.headerSection}>
+        <div>
+          <div className={classes.showItems}>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
+            <div className={classes.item}></div>
           </div>
-        </form>
-      </div>
-      <div className={classes.allMenuSection}>
+        </div>
+
+        <div className={classes.itemsTitle}>
+          {sortedRecipes &&
+            sortedRecipes?.map((el: any) => (
+              <UIItemHome
+                key={el.weekdayId}
+                image={el.recipe?.image}
+                label={el.recipe?.label}
+                weekday={el.weekday}
+                weekdayId={el.weekdayId}
+              />
+            ))}
+        </div>
+        <div className={classes.searchForm}>
+          <form className={classes.form} onSubmit={submitHandler}>
+            <div>
+              <input
+                type="text"
+                placeholder="Search your food e.g pizza"
+                ref={searchInputRef}
+              />
+            </div>
+
+            <div className={classes.searchButton}>
+              <button>Search</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section className={classes.allMenuSection}>
         <AllMenu newData={menuItem} />
-      </div>
+      </section>
 
       <div className={classes.moreBtn}>
-        <button onClick={getFetchHandler}>More...</button>
+        {showItems && <button onClick={fetchMoreRecipes}>More...</button>}
       </div>
-    </div>
+    </main>
   );
 };
 

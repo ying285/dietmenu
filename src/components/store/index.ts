@@ -4,6 +4,7 @@ import menuReducer from "./menuSlice";
 import weekMenuReducer from "./weekMenuSlice";
 import mainMenuReducer from "./mainMenuSlice";
 import searchReducer from "./searchSlice";
+import recipesReducer from "./recipesSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     weekMenu: weekMenuReducer,
     mainMenu: mainMenuReducer,
     search: searchReducer,
+    recipes: recipesReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

@@ -4,19 +4,18 @@ import AllMenuDetail from "../AllMenuDetail/AllMenuDetail";
 import { mainMenuActions } from "../store/mainMenuSlice";
 import { RootState } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
-import useDataFetch from "../hooks/useDataFetch";
 
 const AllMenu: React.FC<{ newData: any }> = (props) => {
-  const { totalData } = useDataFetch();
+  useSelector((state: RootState) => state.search.isShowItems);
+  const recipesItems = useSelector(
+    (state: RootState) => state.recipes.recipesItems
+  );
 
   const dispatch = useDispatch();
+
   const mainMenuItem = useSelector(
     (state: RootState) => state.mainMenu.mainMenuItem
   );
-
-  const showItems = useSelector((state: RootState) => state.search.isShowItems);
-
-  const newMenuItems = props.newData.hits?.map((item: any) => item.recipe);
 
   const fetchData = async () => {
     try {
@@ -37,14 +36,11 @@ const AllMenu: React.FC<{ newData: any }> = (props) => {
 
   const mainData = mainMenuItem?.hits?.map((item: any) => item.recipe);
 
-  console.log(totalData);
-  console.log(mainData);
-
-  return (
-    <div className={classes.allmenu}>
-      <ul>
-        {!showItems &&
-          mainData?.map((el: any) => (
+  if (recipesItems.length === 0) {
+    return (
+      <div className={classes.allmenu}>
+        <ul>
+          {mainData?.map((el: any) => (
             <AllMenuDetail
               key={el.image}
               image={el.image}
@@ -54,33 +50,27 @@ const AllMenu: React.FC<{ newData: any }> = (props) => {
               mealType={el.mealType}
             />
           ))}
-
-        {!showItems &&
-          newMenuItems?.map((el: any) => (
+        </ul>
+      </div>
+    );
+  } else {
+    return (
+      <div className={classes.allmenu}>
+        <ul>
+          {recipesItems.map(({ recipe }: any) => (
             <AllMenuDetail
-              key={el.image}
-              image={el.image}
-              dietLabels={el.dietLabels}
-              label={el.label}
-              cuisineType={el.cuisineType}
-              mealType={el.mealType}
+              key={recipe.image}
+              image={recipe.image}
+              dietLabels={recipe.dietLabels}
+              label={recipe.label}
+              cuisineType={recipe.cuisineType}
+              mealType={recipe.mealType}
             />
           ))}
-
-        {showItems &&
-          totalData?.map((el: any) => (
-            <AllMenuDetail
-              key={el.image}
-              image={el.image}
-              dietLabels={el.dietLabels}
-              label={el.label}
-              cuisineType={el.cuisineType}
-              mealType={el.mealType}
-            />
-          ))}
-      </ul>
-    </div>
-  );
+        </ul>
+      </div>
+    );
+  }
 };
 
 export default AllMenu;

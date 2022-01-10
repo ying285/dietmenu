@@ -4,6 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/index";
 import { weekMenuActions } from "../store/weekMenuSlice";
 
+const days: any = {
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+};
+
 const AllMenuDetail: React.FC<{
   image: string;
   label: string;
@@ -12,61 +22,25 @@ const AllMenuDetail: React.FC<{
   cuisineType: string;
 }> = (props) => {
   const dispatch = useDispatch();
-  const changeColorMon: boolean = useSelector(
-    (state: RootState) => state.weekMenu.isColorMon
-  );
-  const changeColorTue = useSelector(
-    (state: RootState) => state.weekMenu.isColorTue
-  );
-  const changeColorWed = useSelector(
-    (state: RootState) => state.weekMenu.isColorWed
-  );
-  const changeColorThu = useSelector(
-    (state: RootState) => state.weekMenu.isColorThu
-  );
-  const changeColorFri = useSelector(
-    (state: RootState) => state.weekMenu.isColorFri
-  );
-  const changeColorSat = useSelector(
-    (state: RootState) => state.weekMenu.isColorSat
-  );
-  const changeColorSun = useSelector(
-    (state: RootState) => state.weekMenu.isColorSun
-  );
 
-  const monHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("mon"));
-    dispatch(weekMenuActions.labelMatch({ label: props.label, id: "Monday" }));
-  };
-  const tueHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("tue"));
-    dispatch(weekMenuActions.labelMatch({ label: props.label, id: "Tuesday" }));
-  };
-  const wedHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("wed"));
-    dispatch(
-      weekMenuActions.labelMatch({ label: props.label, id: "Wednesday" })
-    );
-  };
-  const thuHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("thu"));
-    dispatch(
-      weekMenuActions.labelMatch({ label: props.label, id: "Thursday" })
-    );
-  };
-  const friHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("fri"));
-    dispatch(weekMenuActions.labelMatch({ label: props.label, id: "Friday" }));
-  };
-  const satHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("sat"));
-    dispatch(
-      weekMenuActions.labelMatch({ label: props.label, id: "Saturday" })
-    );
-  };
-  const sunHandler = () => {
-    dispatch(weekMenuActions.changeBtnColor("sun"));
-    dispatch(weekMenuActions.labelMatch({ label: props.label, id: "Sunday" }));
+  const recipes = useSelector((state: RootState) => state.weekMenu.recipes);
+
+  const isChosen = (weekday: string) =>
+    recipes.some((recipe) => recipe.weekday === weekday);
+
+  const dayHandler = (weekday: string) => {
+    if (isChosen(weekday)) {
+      dispatch(weekMenuActions.removeRecipe({ weekday }));
+    } else {
+      const { children, ...rest } = props;
+      dispatch(
+        weekMenuActions.addRecipe({
+          weekday,
+          recipe: rest,
+          weekdayId: days[weekday.toLowerCase()],
+        })
+      );
+    }
   };
 
   return (
@@ -85,7 +59,24 @@ const AllMenuDetail: React.FC<{
         </div>
 
         <div className={classes.diatDate}>
-          <div
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((weekday) => (
+            <div
+              key={weekday}
+              className={`${classes.item}  ${
+                isChosen(weekday) ? classes.itemColor : ""
+              }`}
+            >
+              <input
+                type="checkbox"
+                name={weekday}
+                onChange={() => dayHandler(weekday)}
+                checked={isChosen(weekday)}
+              />
+              <label htmlFor={weekday}>{weekday}</label>
+            </div>
+          ))}
+
+          {/* <div
             className={`${classes.item}  ${
               changeColorMon ? classes.itemColor : ""
             }`}
@@ -176,7 +167,7 @@ const AllMenuDetail: React.FC<{
               checked={changeColorSun}
             />
             <label htmlFor="sun">Sun</label>
-          </div>
+          </div>*/}
         </div>
       </div>
     </Fragment>

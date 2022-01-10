@@ -1,15 +1,19 @@
 .image {
   background-image: linear-gradient(to right, #7ed56f71, #28b48575),
     url(../../images/headerImage.jpg);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   position: relative;
+  height: 65vh;
+}
+
+.headerSection h4 {
 }
 
 .searchForm {
   position: absolute;
-  top: 1.5%;
-  right: 35%;
+  top: 70%;
+  right: 34%;
 }
 
 .searchForm input {
@@ -48,7 +52,6 @@
 .moreBtn {
   text-align: end;
   margin-right: 10rem;
-
   padding-bottom: 10rem;
 }
 
@@ -65,5 +68,38 @@ button:hover {
 }
 
 .allMenuSection {
-  margin-bottom: -4rem;
+  margin-bottom: -10rem;
+}
+
+.itemsTitle {
+  display: flex;
+  position: absolute;
+  top: 11.5%;
+  left: 6.5%;
+}
+
+.showItems {
+  position: absolute;
+  top: 10%;
+  left: 6%;
+  display: flex;
+}
+
+.item {
+  width: 12rem;
+  height: 15rem;
+  border: 8px solid rgb(248, 244, 244);
+  display: flex;
+  justify-content: center;
+  color: aliceblue;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.HomeBtn {
+  position: fixed;
+  top: 60%;
+  left: 1%;
+  border: 4px solid;
+  border-radius: 10px;
 }

@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface IRecipe {
+  weekday: string;
+  weekdayId: number;
+  recipe: {};
+}
+
 interface weekMenuState {
   isColorMon: boolean;
   isColorTue: boolean;
@@ -9,6 +15,7 @@ interface weekMenuState {
   isColorSat: boolean;
   isColorSun: boolean;
   choosedItem: any;
+  recipes: IRecipe[];
 }
 
 const initialState: weekMenuState = {
@@ -20,12 +27,30 @@ const initialState: weekMenuState = {
   isColorSat: false,
   isColorSun: false,
   choosedItem: [],
+  recipes: [],
 };
 
 const weekMenuSlice = createSlice({
   name: "weekMenu",
   initialState,
   reducers: {
+    addRecipe(state, action: PayloadAction<IRecipe>) {
+      const { weekday, recipe, weekdayId } = action.payload;
+
+      state.recipes.push({ weekday, recipe, weekdayId });
+    },
+    removeRecipe(state, action: PayloadAction<any>) {
+      const { weekday } = action.payload;
+
+      state.recipes = state.recipes.filter(
+        (recipe) => recipe.weekday !== weekday
+      );
+    },
+
+    removeAll(state) {
+      state.recipes.length = 0;
+    },
+
     changeBtnColor(state, action: PayloadAction<string>) {
       switch (action.payload) {
         case "mon":
@@ -52,24 +77,103 @@ const weekMenuSlice = createSlice({
           break;
       }
     },
-    labelMatch(state, action: PayloadAction<any>) {
-      const newItem = action.payload;
-      const existingItem = state.choosedItem?.find(
-        (el: any) => el.label === newItem.label
-      );
-      if (!existingItem) {
-        state.choosedItem = state.choosedItem.concat({
-          label: action.payload.label,
-          id: action.payload.id,
-        });
-      } else {
-        state.choosedItem = state.choosedItem.filter(
-          (el: any) => el.label !== action.payload.label
-        );
-      }
-    },
+    // labelMatch(state, action: PayloadAction<any>) {
+    //   const newItem = action.payload;
+    //   const existingItem = state.choosedItem?.find(
+    //     (el: any) => el.label === newItem.label
+    //   );
+    //   if (!existingItem) {
+    //     state.choosedItem = state.choosedItem.concat({
+    //       label: action.payload.label,
+    //       id: action.payload.id,
+    //     });
+    //   } else {
+    //     state.choosedItem = state.choosedItem.filter(
+    //       (el: any) => el.label !== action.payload.label
+    //     );
+    //   }
+    // },
   },
 });
 
 export const weekMenuActions = weekMenuSlice.actions;
 export default weekMenuSlice.reducer;
+
+// interface weekMenuState {
+//   isColorMon: boolean;
+//   isColorTue: boolean;
+//   isColorWed: boolean;
+//   isColorThu: boolean;
+//   isColorFri: boolean;
+//   isColorSat: boolean;
+//   isColorSun: boolean;
+//   choosedItem: any;
+//   UIHomeItem: any;
+// }
+
+// const initialState: weekMenuState = {
+//   isColorMon: false,
+//   isColorTue: false,
+//   isColorWed: false,
+//   isColorThu: false,
+//   isColorFri: false,
+//   isColorSat: false,
+//   isColorSun: false,
+//   choosedItem: [],
+//   UIHomeItem: [],
+// };
+
+// const weekMenuSlice = createSlice({
+//   name: "weekMenu",
+//   initialState,
+//   reducers: {
+//     UIHomeItemHandler(state, action: PayloadAction<string[]>) {
+//       state.UIHomeItem = action.payload;
+//     },
+
+//     changeBtnColor(state, action: PayloadAction<string>) {
+//       switch (action.payload) {
+//         case "mon":
+//           state.isColorMon = !state.isColorMon;
+//           break;
+//         case "tue":
+//           state.isColorTue = !state.isColorTue;
+//           break;
+//         case "wed":
+//           state.isColorWed = !state.isColorWed;
+//           break;
+//         case "thu":
+//           state.isColorThu = !state.isColorThu;
+//           break;
+//         case "fri":
+//           state.isColorFri = !state.isColorFri;
+//           break;
+//         case "sat":
+//           state.isColorSat = !state.isColorSat;
+//           break;
+//         case "sun":
+//           state.isColorSun = !state.isColorSun;
+//           break;
+//       }
+//     },
+//     labelMatch(state, action: PayloadAction<any>) {
+//       const newItem = action.payload;
+//       const existingItem = state.choosedItem?.find(
+//         (el: any) => el.label === newItem.label
+//       );
+//       if (!existingItem) {
+//         state.choosedItem = state.choosedItem.concat({
+//           label: action.payload?.label,
+//           id: action.payload?.id,
+//         });
+//       } else {
+//         state.choosedItem = state.choosedItem.filter(
+//           (el: any) => el.label !== action.payload.label
+//         );
+//       }
+//     },
+//   },
+// });
+
+// export const weekMenuActions = weekMenuSlice.actions;
+// export default weekMenuSlice.reducer;

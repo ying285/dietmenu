@@ -3,61 +3,65 @@ import { useSelector, useDispatch } from "react-redux";
 import WeekMenuDetail from "../WeekMenuDetail/WeekMenuDetail";
 import classes from "./WeekMenu.module.css";
 import { searchActions } from "../store/searchSlice";
-import { forEachTrailingCommentRange } from "typescript";
+import { weekMenuActions } from "../store/weekMenuSlice";
+import useDataFetch from "../hooks/useDataFetch";
 
 const WeekMenu = () => {
-  const dispatch = useDispatch();
+  const recipes = useSelector((state: RootState) => state.weekMenu.recipes);
+  // const dispatch = useDispatch();
+  // const { getMainData } = useDataFetch();
 
-  const choosedlabel = useSelector(
-    (state: RootState) => state.weekMenu.choosedItem
-  );
-  const mainMenuItem = useSelector(
-    (state: RootState) => state.mainMenu.mainMenuItem
-  );
+  // const choosedlabel = useSelector(
+  //   (state: RootState) => state.weekMenu.choosedItem
+  // );
+  // const mainMenuItem = useSelector(
+  //   (state: RootState) => state.mainMenu.mainMenuItem
+  // );
 
-  const extraMenuItem = useSelector(
-    (state: RootState) => state.extramenu.menuItem
-  );
+  // const extraMenuItem = useSelector(
+  //   (state: RootState) => state.extramenu.menuItem
+  // );
 
-  console.log(mainMenuItem);
-  console.log(extraMenuItem);
+  // let itemArray: any = [];
 
-  let itemArray: any = [];
+  // const mainData = mainMenuItem.hits?.map((item: any) => item.recipe);
+  // const extraData = extraMenuItem.hits?.map((item: any) => item.recipe);
 
-  const mainData = mainMenuItem.hits?.map((item: any) => item.recipe);
-  const extraData = extraMenuItem.hits?.map((item: any) => item.recipe);
+  // const totalData = mainData?.concat(extraData);
 
-  const totalData = mainData?.concat(extraData);
-  console.log(totalData);
+  // dispatch(searchActions.searchMenuItems(totalData));
 
-  dispatch(searchActions.searchMenuItems(totalData));
+  // choosedlabel?.forEach((menuItem: any): void => {
+  //   totalData?.forEach((item: any): void => {
+  //     if (menuItem?.label === item?.label) {
+  //       itemArray.push({ data: item, id: menuItem?.id });
+  //     }
+  //   });
+  // });
 
-  // for (let i = 0; i < totalData?.length; i++) {
-  //   if (choosedlabel[i]?.label === totalData[i]?.label) {
-  //     totalData[i] &&
-  //       itemArray.push({ data: totalData[i], id: choosedlabel[i]?.id });
-  //   }
-  // }
+  // choosedlabel?.forEach((menuItem: any): void => {
+  //   getMainData?.forEach((el: any): void => {
+  //     if (menuItem?.label === el?.label) {
+  //       itemArray.push({ data: el, id: menuItem?.id });
+  //     }
+  //   });
+  // });
 
-  choosedlabel?.forEach((menuItem: any): void => {
-    totalData?.forEach((item: any): void => {
-      if (menuItem?.label === item?.label) {
-        itemArray.push({ data: item, id: menuItem?.id });
-      }
-    });
-  });
+  // itemArray.forEach((el: any) => console.log(el.data.label));
+
+  // dispatch(weekMenuActions.UIHomeItemHandler(itemArray));
 
   return (
     <div className={classes.weekmenu}>
-      {itemArray.map((el: any) => (
+      {recipes.map((el: any) => (
         <WeekMenuDetail
-          key={el.data?.image}
-          image={el.data?.image}
-          label={el.data?.label}
-          cuisineType={el.data?.cuisineType}
-          dietLabels={el.data?.dietLabels}
-          mealType={el.data?.mealType}
-          id={el?.id}
+          key={el.weekday}
+          image={el.recipe.image}
+          label={el.recipe.label}
+          cuisineType={el.recipe.cuisineType}
+          dietLabels={el.recipe.dietLabels}
+          mealType={el.recipe.mealType}
+          id={el?.weekday}
         />
       ))}
     </div>

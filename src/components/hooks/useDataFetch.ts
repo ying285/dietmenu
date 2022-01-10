@@ -19,7 +19,7 @@ const useDataFetch = () => {
       const mainData = await response.json();
       setFetchMainData(mainData);
     } catch (err: any) {
-      alert("There is something wrong!");
+      alert("There is something wrong main data!");
     }
   };
 
@@ -27,13 +27,13 @@ const useDataFetch = () => {
     try {
       const response = await fetch(
         fetchMainData._links.next.href
-        // "https://api.edamam.com/api/recipes/v2?q=lasagne&app_key=9aab7352a044f2870a286522b945386f&_cont=CHcVQBtNNQphDmgVQntAEX4BYlxtAQUBQWZFA2sRYlNwBAsAUXlSVzMUalQgAVAEQzNJB2AbZ1chBgcPF2cRVzcQNQFyB1YVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=2200d214"
+       
       );
 
       const extraData = await response.json();
       setFetchextraData(extraData);
     } catch (err: any) {
-      alert("There is something wrong!");
+      alert("There is something wrong extra data!");
     }
   };
 
@@ -46,6 +46,7 @@ const useDataFetch = () => {
   }, []);
 
   const getMainData = fetchMainData?.hits?.map((item: any) => item.recipe);
+
   const getExtraData = fetchextraData?.hits?.map((item: any) => item.recipe);
   const totalData = getMainData?.concat(getExtraData);
 
