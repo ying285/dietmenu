@@ -1,17 +1,7 @@
-import { RootState } from "../store/index";
-import { useSelector } from "react-redux";
 import classes from "./SearchMenuDetail.module.css";
-import { useParams } from "react-router-dom";
-import useDataFetch from "../hooks/useDataFetch";
 
 const SearchMenuDetail: React.FC = () => {
-  const mySearchOrd = useSelector((state: RootState) => state.search.searchOrd);
-
-  //const { totalData } = useDataFetch();
-
   let result: any;
-
-  // result = totalData?.find((el: any) => el?.label === mySearchOrd);
 
   let elements;
 
@@ -34,9 +24,6 @@ const SearchMenuDetail: React.FC = () => {
     console.log("alert running");
     alert("Please enter a correct search ord!");
   }
-
-  // const params = useParams();
-  // console.log(params);
 
   return (
     <div>

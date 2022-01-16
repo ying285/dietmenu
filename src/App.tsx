@@ -6,10 +6,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { RootState } from "../src/components/store/index";
 import { useSelector } from "react-redux";
 import classes from "./App.module.css";
-import SearchMenuDetail from "./components/SearchMenuDetail/SearchMenuDetail";
-import { useEffect } from "react";
 import { loginActions } from "./components/store/loginSlice";
-
 import { useDispatch } from "react-redux";
 
 function App() {
