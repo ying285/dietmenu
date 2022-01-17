@@ -17,8 +17,8 @@
 
 .searchForm {
   position: absolute;
-  top: 70%;
-  right: 34%;
+  top: 50vh;
+  left: 35%;
 }
 
 .searchForm input {
