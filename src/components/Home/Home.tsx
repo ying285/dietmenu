@@ -92,7 +92,7 @@ const Home: React.FC = () => {
             <div>
               <input
                 type="text"
-                placeholder="Search your menu e.g pizza"
+                placeholder="Search menu e.g pizza"
                 ref={searchInputRef}
               />
             </div>
