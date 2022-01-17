@@ -62,8 +62,8 @@ const Home: React.FC = () => {
       )}
 
       <section className={classes.headerSection}>
-        <div>
-          <h4>Choose your week's menu</h4>
+        <h4>Choose your week's menu</h4>
+        {/*  <div>
           <div className={classes.showItems}>
             <div className={classes.item}></div>
             <div className={classes.item}></div>
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
             <div className={classes.item}></div>
             <div className={classes.item}></div>
           </div>
-        </div>
+        </div> */}
 
         <div className={classes.itemsTitle}>
           {sortedRecipes &&

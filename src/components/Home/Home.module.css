@@ -78,6 +78,7 @@ button:hover {
 
 .itemsTitle {
   display: flex;
+  flex-wrap: wrap;
   position: absolute;
   top: 11.5%;
   left: 6.5%;
