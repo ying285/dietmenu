@@ -4,7 +4,7 @@
 }
 
 .card {
-  width: 26rem;
+  width: 23rem;
   height: 26rem;
   background-color: #fff;
   text-align: start;
@@ -41,25 +41,24 @@
   justify-content: center;
   margin-top: 0;
   margin-left: 1rem;
-
   height: 4rem;
-  width: 26rem;
+  width: 23rem;
   background-color: #fff;
   box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .diatDate input {
-  margin-right: 0.2rem;
+  margin-right: 0.15rem;
 }
 
 .item {
   margin-right: 0.6rem;
   border: 2px solid rgb(189, 188, 188);
   border-radius: 5px;
-
+  font-size: 0.7rem;
   text-align: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   box-shadow: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;

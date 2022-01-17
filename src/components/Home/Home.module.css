@@ -10,7 +10,7 @@
 
 .headerSection h4 {
   position: absolute;
-  top: -6%;
+  top: -10%;
   left: 38%;
   font-size: 2rem;
 }
@@ -81,7 +81,7 @@ button:hover {
   flex-wrap: wrap;
   position: absolute;
   top: 7vh;
-  left: 12%;
+  left: 19%;
 }
 
 .showItems {
