@@ -5,6 +5,7 @@
   background-position: center;
   position: relative;
   height: 65vh;
+  width: 100%;
 }
 
 .headerSection h4 {
