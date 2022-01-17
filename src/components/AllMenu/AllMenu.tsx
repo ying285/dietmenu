@@ -55,8 +55,8 @@ const AllMenu: React.FC<{ newData: any }> = (props) => {
     );
   } else {
     return (
-      <div className={classes.allmenu}>
-        <ul>
+      <div>
+        <ul className={classes.allmenu}>
           {recipesItems.map(({ recipe }: any) => (
             <AllMenuDetail
               key={recipe.image}
