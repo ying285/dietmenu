@@ -80,8 +80,8 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   position: absolute;
-  top: 7vh;
-  left: 17%;
+  top: 8vh;
+  left: 15%;
 }
 
 .showItems {
