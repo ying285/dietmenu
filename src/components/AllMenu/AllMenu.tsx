@@ -38,8 +38,8 @@ const AllMenu: React.FC<{ newData: any }> = (props) => {
 
   if (recipesItems.length === 0) {
     return (
-      <div className={classes.allmenu}>
-        <ul>
+      <div>
+        <ul className={classes.allmenu}>
           {mainData?.map((el: any) => (
             <AllMenuDetail
               key={el.image}

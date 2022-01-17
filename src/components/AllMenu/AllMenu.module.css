@@ -1,8 +1,5 @@
 .allmenu {
-  padding: 65vh 1%;
-}
-
-.allmenu ul {
+  padding: 65vh 0.5rem;
   display: flex;
   flex-wrap: wrap;
 }
