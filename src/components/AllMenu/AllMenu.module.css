@@ -1,5 +1,11 @@
 .allmenu {
-  padding: 65vh 0.5rem;
+  padding: 65vh 10%;
   display: flex;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .allmenu {
+    padding: 65vh 30%;
+  }
 }

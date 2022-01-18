@@ -5,20 +5,20 @@
   background-position: center;
   position: relative;
   height: 65vh;
-  width: 100%;
+  min-width: 60rem;
 }
 
 .headerSection h4 {
   position: absolute;
-  top: -10%;
-  left: 38%;
+  top: -6%;
+  left: 35%;
   font-size: 2rem;
 }
 
 .searchForm {
   position: absolute;
   top: 55vh;
-  left: 35%;
+  left: 32%;
 }
 
 .searchForm input {

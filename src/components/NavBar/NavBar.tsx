@@ -53,7 +53,7 @@ const NavBar: React.FC = () => {
                 }
                 to="/login"
               >
-                Login
+                Login/Signup
               </NavLink>
             </li>
             {loggedIn && (

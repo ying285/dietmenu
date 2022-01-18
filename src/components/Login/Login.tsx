@@ -62,8 +62,8 @@ const Login = () => {
           <input type="password" id="password" ref={passwordInputRef} />
         </div>
         <div className={classes.loginText} onClick={toggleHandler}>
-          {isLogin && <p>Login with existing account</p>}
-          {!isLogin && <p>Create a new account</p>}
+          {isLogin && <p>Login with existing account (Switch to signup)</p>}
+          {!isLogin && <p>Create a new account (Switch to login)</p>}
         </div>
         <div className={classes.actions}>
           <button>Submit</button>
