@@ -21,34 +21,6 @@
   display: none;
 }
 
-.showOrder1 {
-  order: 1;
-}
-
-.showOrder2 {
-  order: 2;
-}
-
-.showOrder3 {
-  order: 3;
-}
-
-.showOrder4 {
-  order: 4;
-}
-
-.showOrder5 {
-  order: 5;
-}
-
-.showOrder6 {
-  order: 6;
-}
-
-.showOrder7 {
-  order: 7;
-}
-
 .label {
   position: absolute;
   top: 0;
@@ -69,4 +41,25 @@
 .showItem:hover .showTitle {
   display: block;
   color: red;
+}
+
+@media screen and (max-width: 830px) {
+  .showItem {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+
+    height: 6rem;
+    width: 6rem;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .weekday {
+    position: absolute;
+    top: 0;
+    left: 2.5rem;
+  }
 }
