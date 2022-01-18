@@ -63,17 +63,6 @@ const Home: React.FC = () => {
 
       <section className={classes.headerSection}>
         <h4>Choose your week's menu</h4>
-        {/*  <div>
-          <div className={classes.showItems}>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-            <div className={classes.item}></div>
-          </div>
-        </div> */}
 
         <div className={classes.itemsTitle}>
           {sortedRecipes &&
