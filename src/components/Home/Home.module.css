@@ -5,7 +5,7 @@
   background-position: center;
   position: relative;
   height: 65vh;
-  min-width: 60rem;
+  min-width: 24rem;
 }
 
 .headerSection h4 {
@@ -108,4 +108,26 @@ button:hover {
   left: 1%;
   border: 4px solid;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 567px) {
+  .headerSection h4 {
+    left: 15%;
+  }
+
+  .searchForm {
+    left: 5%;
+  }
+
+  .searchForm button {
+    font-size: 0.8rem;
+
+    padding: 0.5rem 1.5rem;
+  }
+
+  .searchForm input {
+    font-size: 0.8rem;
+
+    padding: 0.5rem 2rem;
+  }
 }
