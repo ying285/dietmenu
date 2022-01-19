@@ -24,10 +24,10 @@ function App() {
       <main>
         <div className={classes.extraHeight}></div>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           {loggedIn && <Route path="/weekmenu" element={<WeekMenu />} />}
-          <Route path="*" element={<Navigate replace to="/home" />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </main>
     </div>

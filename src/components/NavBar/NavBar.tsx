@@ -28,7 +28,7 @@ const NavBar: React.FC = () => {
                 className={(navData: any) =>
                   navData.isActive ? classes.active : ""
                 }
-                to="/home"
+                to="/"
               >
                 Home
               </NavLink>
